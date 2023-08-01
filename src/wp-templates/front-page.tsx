@@ -8,6 +8,7 @@ import { GetHomePageQuery } from "../__generated__/graphql";
 import { FaustTemplate } from "@faustwp/core";
 
 const Component: FaustTemplate<GetHomePageQuery> = (props) => {
+  console.log('front page template')
   const { title: siteTitle, description: siteDescription } =
     props.data.generalSettings;
   const menuItems = props.data.primaryMenuItems.nodes;

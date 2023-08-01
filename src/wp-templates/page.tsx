@@ -8,6 +8,7 @@ import { FaustTemplate } from "@faustwp/core";
 
 const Component: FaustTemplate<GetPageQuery> = (props) => {
   // Loading state for previews
+  console.log('page template')
   if (props.loading) {
     return <>Loading...</>;
   }
@@ -31,7 +32,7 @@ const Component: FaustTemplate<GetPageQuery> = (props) => {
 
       <main className="container">
         <EntryHeader title={title} />
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div dangerouslySetInnerHTML={{ __html: content }} className="no-preflight" />
       </main>
 
       <Footer />
@@ -40,6 +41,7 @@ const Component: FaustTemplate<GetPageQuery> = (props) => {
 };
 
 Component.variables = ({ databaseId }, ctx) => {
+  console.log({ databaseId })
   return {
     databaseId,
     asPreview: ctx?.asPreview,

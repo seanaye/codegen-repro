@@ -7,6 +7,7 @@ import { GetPostQuery } from "../__generated__/graphql";
 import { FaustTemplate } from "@faustwp/core";
 
 const Component: FaustTemplate<GetPostQuery> = (props) => {
+  console.log('single template')
   // Loading state for previews
   if (props.loading) {
     return <>Loading...</>;

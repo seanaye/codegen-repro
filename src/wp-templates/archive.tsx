@@ -8,6 +8,7 @@ import { GetArchiveQuery } from "../__generated__/graphql";
 import { FaustTemplate } from "@faustwp/core";
 
 const Component: FaustTemplate<GetArchiveQuery> = (props) => {
+  console.log('archive template')
   const { title: siteTitle, description: siteDescription } =
     props.data.generalSettings;
   const menuItems = props.data.primaryMenuItems.nodes;
