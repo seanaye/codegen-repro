@@ -1,3 +1,15 @@
+# Macro WP-Site
+This repo is initially scafolded from [faust-scaffold-ts](https://github.com/wpengine/faust-scaffold-ts)
+
+I am using railway for local development since setting up wordpress locally is both a pain and is somewhat fragile.
+
+
+1. [install railway cli](https://docs.railway.app/develop/cli#installation)
+1. `railway link dd2bf6c4-d41e-449a-850b-29a065ae5b3a`
+1. `railway run pnpm dev`
+
+This will load the wordpress env vars from railway and run the dev server locally
+
 # Faust Scaffold
 
 This repository contains a starter scaffolding to get you up and running quickly on [WP Engine's Atlas platform](https://wpengine.com/atlas/) with a WordPress site skeleton for more advanced developers.
