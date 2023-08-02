@@ -8,14 +8,12 @@ import { FaustTemplate } from "@faustwp/core";
 
 const Component: FaustTemplate<GetPageQuery> = (props) => {
   // Loading state for previews
-  console.log('page template')
+  console.log("page template");
   if (props.loading) {
     return <>Loading...</>;
   }
 
-  const { title: siteTitle, description: siteDescription } =
-    props.data.generalSettings;
-  const menuItems = props.data.primaryMenuItems.nodes;
+  const { title: siteTitle } = props.data.generalSettings;
   const { title, content } = props.data.page;
 
   return (
@@ -24,15 +22,14 @@ const Component: FaustTemplate<GetPageQuery> = (props) => {
         <title>{`${title} - ${siteTitle}`}</title>
       </Head>
 
-      <Header
-        siteTitle={siteTitle}
-        siteDescription={siteDescription}
-        menuItems={menuItems}
-      />
+      {/* <Header fragment={props.data} /> */}
 
       <main className="container">
         <EntryHeader title={title} />
-        <div dangerouslySetInnerHTML={{ __html: content }} className="no-preflight" />
+        <div
+          dangerouslySetInnerHTML={{ __html: content }}
+          className="no-preflight"
+        />
       </main>
 
       <Footer />
@@ -41,7 +38,7 @@ const Component: FaustTemplate<GetPageQuery> = (props) => {
 };
 
 Component.variables = ({ databaseId }, ctx) => {
-  console.log({ databaseId })
+  console.log({ databaseId });
   return {
     databaseId,
     asPreview: ctx?.asPreview,
@@ -50,6 +47,8 @@ Component.variables = ({ databaseId }, ctx) => {
 
 Component.query = gql(`
   query GetPage($databaseId: ID!, $asPreview: Boolean = false) {
+
+
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       title
       content

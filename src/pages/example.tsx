@@ -23,11 +23,7 @@ export default function Page() {
         <title>{siteTitle}</title>
       </Head>
 
-      <Header
-        siteTitle={siteTitle}
-        siteDescription={siteDescription}
-        menuItems={menuItems}
-      />
+      <Header fragment={data}/>
 
       <main className="container">
         <EntryHeader title="Next.js Page Example" />
@@ -40,25 +36,12 @@ export default function Page() {
 }
 
 Page.query = gql(`
+  ${Header.fragments.headerFragment}
   query GetExamplePage {
+    ${Header.fragments.headerFragment}
     generalSettings {
       title
       description
-    }
-    primaryMenuItems: menuItems(where: { location: PRIMARY }) {
-      nodes {
-        id
-        uri
-        path
-        label
-        parentId
-        cssClasses
-        menu {
-          node {
-            name
-          }
-        }
-      }
     }
   }
 `);

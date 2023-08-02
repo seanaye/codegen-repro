@@ -6,9 +6,12 @@ const config: CodegenConfig = {
   generates: {
     "./src/__generated__/": {
       preset: "client",
-      plugins: [],
+      plugins: [
+
+      ],
       presetConfig: {
         gqlTagName: "gql",
+        fragmentMasking: { unmaskFunctionName: 'getFragmentData' }
       },
     },
   },

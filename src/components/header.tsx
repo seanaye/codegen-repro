@@ -1,32 +1,26 @@
-import { gql } from "../__generated__";
+import { FragmentType, getFragmentData, gql } from "../__generated__";
 import Link from "next/link";
-import {
-  HeaderGeneralSettingsFragmentFragment,
-  PrimaryMenuItemFragmentFragment,
-} from "../__generated__/graphql";
 
 type HeaderProps = {
-  siteTitle: HeaderGeneralSettingsFragmentFragment["title"];
-  siteDescription: HeaderGeneralSettingsFragmentFragment["description"];
-  menuItems: PrimaryMenuItemFragmentFragment[];
+  fragment: FragmentType<typeof HeaderFragment>
 };
 
-export default function Header({
-  siteTitle,
-  siteDescription,
-  menuItems,
+function Header({
+  fragment
 }: HeaderProps) {
+  const f = getFragmentData(HeaderFragment, fragment);
+  console.log(f)
   return (
     <header>
       <div className="container">
         <Link href="/">
-          <h2>{siteTitle}</h2>
-          <p>{siteDescription}</p>
+          <h2>{f.generalSettings.title}</h2>
+          <p>{f.generalSettings.description}</p>
         </Link>
 
         <nav>
           <ul>
-            {menuItems.map((item) => (
+            {f.primaryMenuItems.nodes.map((item) => (
               <li key={item.id}>
                 <Link href={item.uri}>{item.label}</Link>
               </li>
@@ -38,15 +32,15 @@ export default function Header({
   );
 }
 
-Header.fragments = {
-  generalSettingsFragment: gql(`
-    fragment HeaderGeneralSettingsFragment on GeneralSettings {
-      title
-      description
-    }
-  `),
-  menuItemFragment: gql(`
-    fragment PrimaryMenuItemFragment on MenuItem {
+export const HeaderFragment = gql(`
+fragment HeaderFragment on RootQuery {
+  generalSettings {
+    title
+    description
+  }
+  primaryMenuItems: menuItems(where: {location: PRIMARY}) {
+    __typename
+    nodes {
       id
       uri
       path
@@ -59,5 +53,8 @@ Header.fragments = {
         }
       }
     }
-  `),
-};
+  }
+}
+`);
+
+export default Header;

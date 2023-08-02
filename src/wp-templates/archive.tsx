@@ -27,11 +27,7 @@ const Component: FaustTemplate<GetArchiveQuery> = (props) => {
         <title>{`${archiveType}: ${name} - ${siteTitle}`}</title>
       </Head>
 
-      <Header
-        siteTitle={siteTitle}
-        siteDescription={siteDescription}
-        menuItems={menuItems}
-      />
+      {/* <Header fragment={props.data}/> */}
 
       <main className="container">
         <EntryHeader title={`Archive for ${archiveType}: ${name}`} />
